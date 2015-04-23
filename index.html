@@ -39,24 +39,26 @@
   <body ng-controller='SelectController'>
     <div class="col-md-6 col-md-offset-3">
       <form name="roleForm" ng-submit="submitted(roleForm)">
+        <h1>Schema Form UI-Select(s):</h1>
         <div class="box-body">
           <div sf-schema="schema" sf-form="form" sf-model="model"></div>
         </div>
+        <h1>Regular UI-Select:</h1>
         <div class="box-body">
         	<ui-select ng-model="model.httpgetselect">
         	  <ui-select-match placeholder="Select...">{{$select.selected.label}}</ui-select-match>
-        		<ui-select-choices repeat="item in testdata">
+        		<ui-select-choices repeat="item in testdata_wrapper">
         			<div ng-bind-html="item.label"></div>
         		</ui-select-choices>
         	</ui-select>
         </div>
         <div class="box-footer">
-          <button type="submit" class="btn btn-primary btn-flat">{{ 'buttons.save' | translate }}</button>
-          <a ui-sref="roles" class="btn btn-warning btn-flat pull-right">{{ 'buttons.cancel' | translate }}</a>
-       		<h3>Model:</h3>
+       		<h1>Model:</h1>
         	<pre>
         		{{model | json}}
         	</pre>
+          <button type="submit" class="btn btn-primary btn-flat">{{ 'buttons.save' | translate }}</button>
+          <a ui-sref="roles" class="btn btn-warning btn-flat pull-right">{{ 'buttons.cancel' | translate }}</a>
         </div>
       </form>
     </div>

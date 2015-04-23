@@ -27,7 +27,7 @@ var lightApp = angular.module('lightApp', [
 
 		}
 	])
-	.controller('SelectController', ['$scope', '$http', function($scope, $http) {
+	.controller('SelectController', ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
 
 		$scope.schema = {
 			type: 'object',
@@ -452,11 +452,15 @@ var lightApp = angular.module('lightApp', [
 			httpgetselect: {"value": "json-value1", "label": "json-label1"}
 		};
 
-		$scope.testdata = [
-      {"value": "json-value1", "label": "json-label1"},
-      {"value": "json-value2", "label": "json-label2"},
-      {"value": "json-value3", "label": "json-label3"}
-		];
+		$scope.testdata = [];
+		$timeout(function() {
+			$scope.testdata = $scope.refreshSelectAsync(undefined, {
+				async: {
+					url: '/test/testdata.json'
+				}
+			}, undefined);
+		}, 3000);
+		
 
 		$scope.refreshSelect = function(schema, options, search) {
 			console.log('refreshSelect is called');

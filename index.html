@@ -47,7 +47,7 @@
         <div class="box-body">
         	<ui-select ng-model="model.httpgetselect">
         	  <ui-select-match placeholder="Select...">{{$select.selected.label}}</ui-select-match>
-        		<ui-select-choices repeat="item in testdata_wrapper">
+        		<ui-select-choices repeat="item in testdata">
         			<div ng-bind-html="item.label"></div>
         		</ui-select-choices>
         	</ui-select>

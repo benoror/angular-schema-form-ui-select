@@ -452,14 +452,19 @@ var lightApp = angular.module('lightApp', [
 			httpgetselect: {"value": "json-value1", "label": "json-label1"}
 		};
 
+		$scope.refreshSelectAsync = function(schema, options, search) {
+			console.log('refreshSelectAsync is called');
+			return $http.get(options.async.url);
+		}
+
 		$scope.testdata = [];
-		$timeout(function() {
-			$scope.testdata = $scope.refreshSelectAsync(undefined, {
-				async: {
-					url: '/test/testdata.json'
-				}
-			}, undefined);
-		}, 3000);
+		$scope.refreshSelectAsync(undefined, {
+			async: {
+				url: '/test/testdata.json'
+			}
+		}, undefined).then(function (response) {
+			$scope.testdata = response.data;
+		});
 		
 
 		$scope.refreshSelect = function(schema, options, search) {
@@ -474,11 +479,6 @@ var lightApp = angular.module('lightApp', [
 				value: 'refreshed3',
 				label: 'refreshed3'
 			}];
-		}
-
-		$scope.refreshSelectAsync = function(schema, options, search) {
-			console.log('refreshSelectAsync is called');
-			return $http.get(options.async.url);
 		}
 
 		$scope.tagFunction = function(content) {

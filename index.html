@@ -37,21 +37,28 @@
     </style>
   </head>
   <body ng-controller='SelectController'>
-    <div class="box box-primary ng-cloak">
-      <div class="box-header">
-        <h3 class="box-title">{{$root.$state.current.data.label}} - {{model.name}}</h3>
-      </div>
+    <div class="col-md-6 col-md-offset-3">
       <form name="roleForm" ng-submit="submitted(roleForm)">
         <div class="box-body">
           <div sf-schema="schema" sf-form="form" sf-model="model"></div>
         </div>
+        <div class="box-body">
+        	<ui-select ng-model="model.httpgetselect">
+        	  <ui-select-match placeholder="Select...">{{$select.selected.label}}</ui-select-match>
+        		<ui-select-choices repeat="item in testdata">
+        			<div ng-bind-html="item.label"></div>
+        		</ui-select-choices>
+        	</ui-select>
+        </div>
         <div class="box-footer">
           <button type="submit" class="btn btn-primary btn-flat">{{ 'buttons.save' | translate }}</button>
           <a ui-sref="roles" class="btn btn-warning btn-flat pull-right">{{ 'buttons.cancel' | translate }}</a>
+       		<h3>Model:</h3>
+        	<pre>
+        		{{model | json}}
+        	</pre>
         </div>
-        </form>
-      </div>
+      </form>
     </div>
-    
   </body>
 </html>
